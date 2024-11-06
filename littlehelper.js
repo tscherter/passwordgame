@@ -186,10 +186,12 @@ function init() {
     hole.appendChild(button);
 
     let msg = document.createElement("pre");
-    msg.innerHTML = `⚠️ It uses online resources that may take some time or fail,
+    msg.style.fontSize = "10px";
+    msg.innerHTML = `🧪 Experimental, just restart if it breaks
+⚠️ It uses online resources that may take some time or fail,
     e.g. while solving the chess problem, geo guessing.
 ⚠️ YouTube IDs can conflict with the atoms summing to 200 (rule 18).
-⚠️ Current time might be an issue conflicting with rule 5.
+⚠️ Current time o. captcha might be an issue conflicting with rule 5.
 💡 Sometimes deleting a part of the password may help.
 💡 Copy the password before proceeding with final step.`;
     hole.appendChild(msg);
