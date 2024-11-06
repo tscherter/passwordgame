@@ -3,6 +3,7 @@
 // current time might be an issue conflicting with rule 5
 
 const { max, min } = Math;
+const delay = 200;
 
 document.head.appendChild(
     Object.assign(document.createElement("script"), {
@@ -28,60 +29,55 @@ levels[3] = ["Hell0"];
 levels[4] = ["H€ll0"];
 
 // The digits in your password must add up to 25.
-let sum = [digitSumTo25];
-levels[5] = ["H€ll", sum];
+levels[5] = ["H€ll", sum25];
 
 // Your password must include a month of the year.
-levels[6] = ["H€may", sum];
+levels[6] = ["H€may", sum25];
 
 // … include a roman numeral.
-levels[7] = ["I€may", sum];
+levels[7] = ["I€may", sum25];
 
 // … include one of our sponsors: …
-levels[8] = ["I€mayshell", sum];
+levels[8] = ["I€mayshell", sum25];
 
 // The roman numerals in your password should multiply to 35.
-let txt = "I€XXXVmayshell";
-levels[9] = [txt, sum];
+levels[9] = ["I€XXXVmayshell", sum25];
 
 // Your password must include this CAPTCHA...
 let content = [captcha];
-levels[10] = [txt, content, sum];
+levels[10] = ["I€XXXVmayshell", content, sum25];
 
 // … include today's Wordle answer.
 content = [...content, wordle];
-levels[11] = [txt, content, sum];
+levels[11] = ["I€XXXVmayshell", content, sum25];
 
 // … include a two letter symbol from the periodic table.
-txt = "ImayXXXVshellBe€";
-levels[12] = [txt, content, sum];
+levels[12] = ["ImayXXXVshellBe€", content, sum25];
 
 // … include the current phase of the moon as an emoji.
 content = [moon, ...content];
-levels[13] = [txt, content, sum];
+levels[13] = ["ImayXXXVshellBe€", content, sum25];
 
 // … include the name of this country.
 content = [...content, country];
-levels[14] = [txt, content, sum];
+levels[14] = ["ImayXXXVshellBe€", content, sum25];
 
 // …  include a leap year.
-txt = "0" + txt;
-levels[15] = [txt, content, sum];
+levels[15] = ["0ImayXXXVshellBe€", content, sum25];
 
 // …  include the best move in algebraic chess notation.
 content = [...content, chess];
-levels[16] = [txt, content, sum];
+levels[16] = ["0ImayXXXVshellBe€", content, sum25];
 
 // 🥚 ← This is my chicken Paul. He hasn't hatched yet, please put him in your password and keep him safe.
-txt = "🥚" + txt;
-levels[17] = [txt, content, sum];
+levels[17] = ["🥚0ImayXXXVshellBe€", content, sum25];
 
 // The elements in your password must have atomic numbers that add up to 200.
-sum = [...sum, chemicalTo200];
-levels[18] = [txt, content, sum];
+let sum = [sum25, chemicalTo200];
+levels[18] = ["🥚0ImayXXXVshellBe€", content, sum];
 
 // All the vowels in your password must be bolded.
-levels[19] = [txt, content, sum, vowels];
+levels[19] = ["🥚0ImayXXXVshellBe€", content, sum, vowels];
 
 // Oh no! Your password is on fire. Quick, put it out!
 levels[20] = levels[19];
@@ -94,7 +90,7 @@ levels[21] = ["🥚🏋️‍♂️🏋️‍♂️🏋️‍♂️0ImayXXXVshel
 levels[22] = ["🥚🏋️‍♂️🏋️‍♂️🏋️‍♂️0IamlovedmayXXXVshellBe", content, sum, vowels];
 
 // Paul has hatched … 🐛🐛🐛🐛
-txt = "🐛🐔0🏋️‍♂️🏋️‍♂️🏋️‍♂️101IamlovedmayXXXVshellBe";
+let txt = "🐛🐔0🏋️‍♂️🏋️‍♂️🏋️‍♂️101IamlovedmayXXXVshellBe";
 content = [...content];
 levels[23] = [txt, content, sum, vowels];
 
@@ -161,7 +157,6 @@ function format() {
 
         state.formatedPassword += `<span style="${style}">${letter}</span>`;
     });
-    console.log(sizes);
 }
 
 const state = init();
@@ -200,7 +195,7 @@ function init() {
     hole.appendChild(msg);
 
     state?.observer?.disconnect();
-    state.observer = new MutationObserver(debounce(update));
+    state.observer = new MutationObserver(debounce(update, delay));
     state.observer.observe(document.body, {
         attributes: true,
         childList: true,
@@ -237,12 +232,10 @@ function update() {
         newPassword != state.lastPassword
     ) {
         target.innerHTML = state.lastPassword = newPassword;
-        console.log(target.innerHTML);
     }
 }
 
 function shuffle() {
-    console.log("shuffle");
     state.youtubeDiff = Math.floor(Math.random() * 3) - 1;
     update();
 }
@@ -250,7 +243,7 @@ function shuffle() {
 function startWith(initial) {
     return () => (state.password = initial);
 }
-function digitSumTo25() {
+function sum25() {
     let s = [...state.password]
         .filter(Number)
         .map(Number)
@@ -454,7 +447,7 @@ async function fetchChess() {
     state.fetchingChess = false;
 }
 
-function debounce(func, delay = 300) {
+function debounce(func, delay = 1000) {
     let timeout;
     return (...args) => {
         clearTimeout(timeout);

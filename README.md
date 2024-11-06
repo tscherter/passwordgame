@@ -14,5 +14,9 @@ An almost automagic solver for https://neal.fun/password-game/
   -  Luke, check the source. You might consider shortening the debounce delay, though the script was designed to mimic user behaviour, not prioritize speed.
 
 
+## Todo
+- Refresh captch until no digits are contained
+- Add ```pre``` with password in plaintext for debugging purposes
+
 ## Credits
   * I used the list with YouTube IDs that is available on the web on various sites. Thank you for that.
