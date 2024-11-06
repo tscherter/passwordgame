@@ -15,8 +15,10 @@ An almost automagic solver for https://neal.fun/password-game/
 
 
 ## Todo
-- Refresh captch until no digits are contained
-- Add ```pre``` with password in plaintext for debugging purposes
+- Refresh captch until no digits are contained.
+- Add ```pre``` with password in plaintext for debugging purposes.
+- Create a bookmarklet for sideloading the script.
+- replace vowels with format
 
 ## Credits
   * I used the list with YouTube IDs that is available on the web on various sites. Thank you for that.
