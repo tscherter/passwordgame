@@ -185,15 +185,18 @@ function init() {
     document.querySelector(".password-label").appendChild(button);
     hole.appendChild(button);
 
-    let msg = document.createElement("pre");
-    msg.style.fontSize = "10px";
-    msg.innerHTML = `🧪 Experimental, just restart if it breaks
+    let msg = document.createElement("div");
+    msg.innerHTML = `<details>
+    <summary>💡 The Automagic Password Helper: click to for more information</summary><ul>
+    <li>
+  🧪 Experimental, just restart if it breaks</li><li>
 ⚠️ It uses online resources that may take some time or fail,
-    e.g. while solving the chess problem, geo guessing.
-⚠️ YouTube IDs can conflict with the atoms summing to 200 (rule 18).
-⚠️ Current time o. captcha might be an issue conflicting with rule 5.
-💡 Sometimes deleting a part of the password may help.
-💡 Copy the password before proceeding with final step.`;
+    e.g. while solving the chess problem, geo guessing.</li><li>
+⚠️ YouTube IDs can conflict with the atoms summing to 200 (rule 18).</li><li>
+⚠️ Current time o. captcha might be an issue conflicting with rule 5.</li><li>
+💡 Sometimes deleting a part of the password may help.</li><li>
+💡 Copy the password before proceeding with final step.</li></ol>
+</details>`;
     hole.appendChild(msg);
 
     state?.observer?.disconnect();
