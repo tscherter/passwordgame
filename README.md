@@ -11,7 +11,7 @@ An almost automagic solver for https://neal.fun/password-game/
 
 ## Q & A
 - Can it solve the game faster?
-  -  Luke, check the source. You might consider shortening the debounce delay, though the script was designed to mimic user behaviour, not prioritize speed.
+    - Luke, check the source. You might consider shortening the debounce delay, though the script was designed to mimic user behaviour, not prioritize speed.
 
 
 ## Todo
@@ -21,4 +21,4 @@ An almost automagic solver for https://neal.fun/password-game/
 - replace vowels with format
 
 ## Credits
-  * I used the list with YouTube IDs that is available on the web on various sites. Thank you for that.
+- I used the list with YouTube IDs that is available on the web on various sites. Thank you for that.
