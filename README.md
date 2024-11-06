@@ -13,5 +13,8 @@ An almost automagic solver for https://neal.fun/password-game/
 - Can it solve the game faster?
   -  Luke, check the source. You might consider shortening the debounce delay, though the script was designed to mimic user behaviour, not prioritize speed.
 
+## To be fixed
+- Last step where you have to re-type your password 
+
 ## Credits
   * I used the list with YouTube IDs that is available on the web on various sites. Thank you for that.
