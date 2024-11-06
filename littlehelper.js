@@ -167,10 +167,15 @@ function format() {
 const state = init();
 
 function init() {
+    const state = window._state ?? {};
+    window._state = state;
+
+    const hole = document.querySelector(".password-label");
+
     let button = document.createElement("button");
     button.innerHTML = "shuffle youtube";
     button.onclick = shuffle;
-    document.querySelector(".password-label").appendChild(button);
+    hole.appendChild(button);
 
     button = document.createElement("button");
     button.innerHTML = "captcha refresh";
@@ -178,10 +183,9 @@ function init() {
         document.querySelector(".captcha-refresh").click();
     };
     document.querySelector(".password-label").appendChild(button);
-
-    const state = window._state ?? {};
-    window._state = state;
-    state.attempts = 0;
+    hole.appendChild(button);
+    state.msg = document.createElement("div");
+    hole.appendChild(state.msg);
 
     state?.observer?.disconnect();
     state.observer = new MutationObserver(debounce(update));
@@ -239,6 +243,10 @@ function digitSumTo25() {
         .filter(Number)
         .map(Number)
         .reduce((a, c) => a + c, 0);
+    state.msg.innerHTML =
+        s < 0
+            ? "Fail to sum to 25! Change current time or refresh captcha"
+            : "";
     state.password +=
         "" +
         "997:996:995:994:993:992:991:99:98:97:96:95:94:93:92:91:9:8:7:6:5:4:3:2:1:".split(
@@ -437,7 +445,7 @@ async function fetchChess() {
     state.fetchingChess = false;
 }
 
-function debounce(func, delay = 1000) {
+function debounce(func, delay = 300) {
     let timeout;
     return (...args) => {
         clearTimeout(timeout);
