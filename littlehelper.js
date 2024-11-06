@@ -184,8 +184,15 @@ function init() {
     };
     document.querySelector(".password-label").appendChild(button);
     hole.appendChild(button);
-    state.msg = document.createElement("div");
-    hole.appendChild(state.msg);
+
+    let msg = document.createElement("pre");
+    msg.innerHTML = `⚠️ It uses online resources that may take some time or fail,
+    e.g. while solving the chess problem, geo guessing.
+⚠️ YouTube IDs can conflict with the atoms summing to 200 (rule 18).
+⚠️ Current time might be an issue conflicting with rule 5.
+💡 Sometimes deleting a part of the password may help.
+💡 Copy the password before proceeding with final step.`;
+    hole.appendChild(msg);
 
     state?.observer?.disconnect();
     state.observer = new MutationObserver(debounce(update));
@@ -243,10 +250,7 @@ function digitSumTo25() {
         .filter(Number)
         .map(Number)
         .reduce((a, c) => a + c, 0);
-    state.msg.innerHTML =
-        s < 0
-            ? "Fail to sum to 25! Change current time or refresh captcha"
-            : "";
+
     state.password +=
         "" +
         "997:996:995:994:993:992:991:99:98:97:96:95:94:93:92:91:9:8:7:6:5:4:3:2:1:".split(
