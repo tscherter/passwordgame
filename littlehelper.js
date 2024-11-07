@@ -3,15 +3,9 @@
 // current time might be an issue conflicting with rule 5
 
 const { max, min } = Math;
-const delay = 200;
-
-document.head.appendChild(
-    Object.assign(document.createElement("script"), {
-        src: "https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js",
-    })
-);
-
+const delay = 1000;
 const levels = [];
+
 levels[0] = ["hi"];
 
 // Your password must be at least 5 characters.
@@ -111,16 +105,25 @@ levels[28] = [text, moonToHex, youtube, sum25, atom];
 levels[31] = levels[30] = levels[29] = levels[28];
 
 //
-levels[32] = [text, moonToHex, youtube, sum25, atom, fill];
+levels[32] = [text, moonToHex, sum25, atom, fill];
 levels[34] = levels[33] = levels[32];
-levels[35] = [text, hhmm, moonToHex, youtube, sum25, atom, fill];
+levels[35] = [text, hhmm, moonToHex, sum25, atom, fill];
 
 const state = window._state ?? {};
 window._state = state;
+
 init();
 
 function init() {
+    if (!window?.Chess)
+        document.head.appendChild(
+            Object.assign(document.createElement("script"), {
+                src: "https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js",
+            })
+        );
+
     state.target = document.querySelector(".ProseMirror");
+    state.update = debounce(update, delay);
 
     const hole = document.querySelector(".password-label");
 
@@ -160,15 +163,14 @@ function init() {
     hole.appendChild(msg);
 
     state?.observer?.disconnect();
-    state.observer = new MutationObserver(debounce(update, delay));
+    state.observer = new MutationObserver(state.update);
     state.observer.observe(document.body, {
         attributes: true,
         childList: true,
         subtree: true,
         characterData: true,
     });
-    setTimeout(update);
-    console.log(state);
+    state.update();
     return state;
 }
 
@@ -206,7 +208,7 @@ function update() {
 
 function shuffle() {
     state.youtubeDiff = Math.floor(Math.random() * 3) - 1;
-    update();
+    state.update();
 }
 // handlers
 
@@ -432,7 +434,7 @@ function format(password) {
 // helpers
 
 async function fetchChess() {
-    if (state.fetchingChess || !Chess) return;
+    if (state.fetchingChess || !window?.Chess) return;
     state.fetchingChess = true;
     const chessElement = document.querySelector(".chess-img");
     const color = document
