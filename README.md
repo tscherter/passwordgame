@@ -16,6 +16,9 @@ An almost automagic solver for https://neal.fun/password-game/
 
 ## Todo / Fixes needed
 - Create a bookmarklet for sideloading the script.
+- Start button
+- Final stage copy pase
+- Reload if chess can't be solved by lichess.org
 
 ## Credits
 - I used the list with YouTube IDs that is available on the web on various sites. Thank you for that.
