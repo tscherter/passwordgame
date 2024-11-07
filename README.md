@@ -1,5 +1,5 @@
 # Auto Password Gamer
-An almost automagic solver for https://neal.fun/password-game/
+An almost automagic solver for https://neal.fun/password-game/ 
 
 ## How to use it
 - 👉 Copy the code you find in ```autosolver.js``` into your browsers console.
@@ -11,7 +11,7 @@ An almost automagic solver for https://neal.fun/password-game/
 
 ## Q & A
 - Can it solve the game faster?
-    - Luke, check the source. You might consider shortening the debounce delay, though the script was designed to mimic user behaviour, not prioritize speed.
+    - Luke, look at the source. You might consider shortening the debounce delay, though the script was designed to mimic user behaviour, not prioritize speed.
 
 
 ## Todo / Fixes needed
