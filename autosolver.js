@@ -3,7 +3,7 @@
 // current time might be an issue conflicting with rule 5
 
 const { max, min } = Math;
-const delay = 100;
+const delay = 10;
 const levels = [];
 
 levels[0] = ["hi"];
@@ -275,8 +275,7 @@ function moon() {
         phaseIndex = 0; // New Moon 🌑
     }
     return moonPhases[phaseIndex];
-    // Workaround for for edge cases
-    // return moonPhases.slice(phaseIndex - 2, phaseIndex).join("");
+    
 }
 function country() {
     if (!state.country && !state.fetshingCountry) {
@@ -386,6 +385,10 @@ function hexColor() {
 }
 
 function fill(password) {
+
+    text.length
+    [...text]
+
     const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
     const charCount = Array.from(segmenter.segment(password)).length;
     const hexagrams =
