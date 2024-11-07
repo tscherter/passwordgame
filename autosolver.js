@@ -127,25 +127,9 @@ function init() {
 
     const hole = document.querySelector(".password-label");
 
-    let button = document.createElement("button");
-    button.innerHTML = "shuffle youtube";
-    button.onclick = shuffle;
-    hole.appendChild(button);
-
-    document.querySelector(".password-label").appendChild(button);
-    hole.appendChild(button);
-
-    state.plain = document.createElement("pre");
-    state.plain.style.backgroundColor = "#ddffdd";
-    state.plain.style.padding = "1ex";
-    state.plain.style.whiteSpace = "pre-wrap";
-    state.plain.style.overflowWrap = "break-word";
-    state.plain.style.wordBreak = "break-all";
-    hole.appendChild(state.plain);
-
     let msg = document.createElement("div");
-    msg.innerHTML = `<details>
-    <summary> Help ❓ click to for more information</summary><ul>
+    msg.innerHTML = `<details id='help'>
+    <summary>❓</summary><ul>
     <li>
   🧪 The autosolver is experimental, just restart if it breaks.</li><li>
 ⚠️ It uses online resources that may take some time or fail,
@@ -156,6 +140,14 @@ function init() {
 💡 Copy the password before proceeding with final step.</li></ol>
 </details>`;
     hole.appendChild(msg);
+
+    state.plain = document.createElement("pre");
+    state.plain.style.backgroundColor = "#ddffdd";
+    state.plain.style.padding = "1ex";
+    state.plain.style.whiteSpace = "pre-wrap";
+    state.plain.style.overflowWrap = "break-word";
+    state.plain.style.wordBreak = "break-all";
+    help.appendChild(state.plain);
 
     state?.observer?.disconnect();
     state.observer = new MutationObserver(state.update);
