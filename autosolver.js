@@ -3,7 +3,7 @@
 // current time might be an issue conflicting with rule 5
 
 const { max, min } = Math;
-const delay = 200;
+const delay = 1000;
 const levels = [];
 
 levels[0] = ["hi"];
@@ -221,7 +221,6 @@ function sum25(password) {
     );
 }
 function captcha() {
-    // document.querySelector(".captcha-refresh")
     const captchaElement = document.querySelector(".captcha-img");
     const src = captchaElement.src; // https://neal.fun/password-game/captchas/mm3nn.png
     const match = src.match(/([a-z0-9]{5})\.png/)[1];
@@ -386,6 +385,11 @@ function hexColor() {
             .map(Number)
             .map((x) => x.toString(16).padStart(2, 0))
             .join("");
+    if (rgb.match(/[0-9]/)) {
+        document.querySelector(".refresh").click();
+        state.update();
+    }
+
     return rgb;
 }
 
@@ -394,7 +398,6 @@ function fill(password) {
     const charCount = Array.from(segmenter.segment(password)).length;
     const hexagrams =
         "䷀䷁䷂䷃䷄䷅䷆䷇䷈䷉䷊䷋䷌䷍䷎䷏䷐䷑䷒䷓䷔䷕䷖䷗䷘䷙䷚䷛䷜䷝䷞䷟䷠䷡䷢䷣䷤䷥䷦䷧䷨䷩䷪䷫䷬䷭䷮䷯䷰䷱䷲䷳䷴䷵䷶䷷䷸䷹䷺䷻䷼䷽䷾䷿";
-    console.log({ charCount });
     return hexagrams.slice(0, 101 - charCount);
 }
 function format(password) {

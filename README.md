@@ -2,7 +2,7 @@
 An almost automagic solver for https://neal.fun/password-game/
 
 ## How to use it
-- 👉 Copy the code you find in ```littlehelper.js``` into your browsers console.
+- 👉 Copy the code you find in ```autosolver.js``` into your browsers console.
 - ⚠️ It uses online resources that may take some time or fail, e.g. while solving the chess problem, geo guessing.
 - ⚠️ YouTube IDs can conflict with the atoms summing to 200 (rule 18).
 - ⚠️ Current time might be an issue conflicting with rule 5.
@@ -15,11 +15,7 @@ An almost automagic solver for https://neal.fun/password-game/
 
 
 ## Todo / Fixes needed
-- Password length issues (blame astral planes) 
-- Refresh captch until no digits are contained.
-- Add ```pre``` with password in plaintext for debugging purposes.
 - Create a bookmarklet for sideloading the script.
-- replace vowels with format
 
 ## Credits
 - I used the list with YouTube IDs that is available on the web on various sites. Thank you for that.
