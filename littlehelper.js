@@ -44,120 +44,78 @@ levels[8] = ["I€mayshell", sum25];
 levels[9] = ["I€XXXVmayshell", sum25];
 
 // Your password must include this CAPTCHA...
-let content = [captcha];
-levels[10] = ["I€XXXVmayshell", content, sum25];
+levels[10] = ["I€XXXVmayshell", captcha, sum25];
 
 // … include today's Wordle answer.
-content = [...content, wordle];
-levels[11] = ["I€XXXVmayshell", content, sum25];
+levels[11] = ["I€XXXVmayshell", captcha, wordle, sum25];
 
 // … include a two letter symbol from the periodic table.
-levels[12] = ["ImayXXXVshellBe€", content, sum25];
+levels[12] = ["ImayXXXVshellBe€", captcha, wordle, sum25];
 
 // … include the current phase of the moon as an emoji.
-content = [moon, ...content];
-levels[13] = ["ImayXXXVshellBe€", content, sum25];
+levels[13] = ["ImayXXXVshellBe€", moon, captcha, wordle, sum25];
 
 // … include the name of this country.
-content = [...content, country];
-levels[14] = ["ImayXXXVshellBe€", content, sum25];
+
+levels[14] = ["ImayXXXVshellBe€", moon, captcha, wordle, country, sum25];
 
 // …  include a leap year.
-levels[15] = ["0ImayXXXVshellBe€", content, sum25];
+levels[15] = ["0ImayXXXVshellBe€", moon, captcha, wordle, country, sum25];
 
 // …  include the best move in algebraic chess notation.
-content = [...content, chess];
-levels[16] = ["0ImayXXXVshellBe€", content, sum25];
+let moonToChess = [moon, captcha, wordle, country, chess];
+levels[16] = ["0ImayXXXVshellBe€", moonToChess, sum25];
 
 // 🥚 ← This is my chicken Paul. He hasn't hatched yet, please put him in your password and keep him safe.
-levels[17] = ["🥚0ImayXXXVshellBe€", content, sum25];
+levels[17] = ["🥚0ImayXXXVshellBe€", moonToChess, sum25];
 
 // The elements in your password must have atomic numbers that add up to 200.
-let sum = [sum25, chemicalTo200];
-levels[18] = ["🥚0ImayXXXVshellBe€", content, sum];
+levels[18] = ["🥚0ImayXXXVshellBe€", moon, moonToChess, sum25, atom];
 
 // All the vowels in your password must be bolded.
-levels[19] = ["🥚0ImayXXXVshellBe€", content, sum, vowels];
+levels[19] = ["🥚0ImayXXXVshellBe€", moonToChess, sum25, atom, format];
 
 // Oh no! Your password is on fire. Quick, put it out!
 levels[20] = levels[19];
 
 // Your password is not strong enough 🏋️‍♂️
 
-levels[21] = ["🥚🏋️‍♂️🏋️‍♂️🏋️‍♂️0ImayXXXVshellBe", content, sum, vowels];
+levels[21] = ["🥚🏋️‍♂️🏋️‍♂️🏋️‍♂️0ImayXXXVshellBe", moonToChess, sum25, atom, format];
 
 // … must contain one of the following affirmations: ...
-levels[22] = ["🥚🏋️‍♂️🏋️‍♂️🏋️‍♂️0IamlovedmayXXXVshellBe", content, sum, vowels];
+let text = "🥚🏋️‍♂️🏋️‍♂️🏋️‍♂️0IamlovedmayXXXVshellBe";
+
+levels[22] = [text, moonToChess, sum25, atom, format];
 
 // Paul has hatched … 🐛🐛🐛🐛
-let txt = "🐛🐔0🏋️‍♂️🏋️‍♂️🏋️‍♂️101IamlovedmayXXXVshellBe";
-content = [...content];
-levels[23] = [txt, content, sum, vowels];
+text = "🐛🐔0🏋️‍♂️🏋️‍♂️🏋️‍♂️101IamlovedmayXXXVshellBe";
+levels[23] = [text, moonToChess, sum25, atom, format];
 
 // Your password must include the URL of a X minute Y second long YouTube video.
-content = [...content, youtube];
-levels[24] = [txt, content, sum, vowels];
+levels[24] = [text, moonToChess, youtube, sum25, atom, format];
 
 // A sacrifice must be made. Pick 2 letters that you will no longer be able to use.
-levels[25] = [txt, content, sum, vowels, sacrifice];
+levels[25] = [text, moonToChess, youtube, sum25, atom, format, sacrifice];
 
 // Your password must contain twice as many italic characters as bold
-levels[26] = [txt, content, sum, format];
+levels[26] = [text, moonToChess, youtube, sum25, atom, format];
 
 // At least 30% of your password must be in the Wingdings font.
 levels[27] = levels[26];
 
 // Your password must include this color in hex.
-levels[28] = [txt, content, hexColor, sum, format];
+let moonToHex = [moonToChess, youtube, hexColor];
+levels[28] = [text, moonToHex, youtube, sum25, atom, format];
+
 // All roman numerals must be in Times New Roman.
 // The font size of every digit must be equal to its square.
 // Every instance of the same letter must have a different font size.
 levels[31] = levels[30] = levels[29] = levels[28];
 
-levels[32] = [txt, content, hexColor, sum, fill, format];
+//
+levels[32] = [text, moonToHex, youtube, sum25, atom, fill, format];
 levels[34] = levels[33] = levels[32];
-levels[35] = [txt, hhmm, content, hexColor, sum, fill, format];
-
-function fill() {
-    const l = 101 - [...state.password].length + 12;
-    state.password +=
-        "!#$%&'()*+,-./:;=?@[]^_`{|}~!#$%&'()*+,-./:;=?@[]^_`{|}~".substr(0, l);
-}
-function format() {
-    state.formatedPassword = "";
-    let letters = [...state.password];
-    let sizes = [0, 1, 4, 9, 12, 16, 25, 28, 32, 36, 42, 49, 64, 81];
-    let letterindex = {};
-    let len = letters.length;
-    letters.forEach((letter, index) => {
-        let style = "";
-        if (letter.match(/[aeiouy]/i)) {
-            style += "font-weight: bold;";
-        } else if (state.level >= 30 && letter.match(/[0-9]/)) {
-            style += `font-size: ${Number(letter) ** 2}px;`;
-        }
-        if (state.level >= 28 && letter.match(/[XVI]/i)) {
-            style += "font-family: Times New Roman;";
-        } else if (state.level >= 27 && letter.match(/[a-zA-Z]/)) {
-            style += "font-family: Wingdings;";
-        }
-        if (state.level >= 31 && !letter.match(/[0-9]/)) {
-            let x = letter.toLowerCase();
-            if (letterindex[x]) {
-                letterindex[x]++;
-            } else {
-                letterindex[x] = 5;
-            }
-            style += `font-size: ${sizes[letterindex[x]]}px;`;
-        }
-
-        if (state.level >= 26 && letter.match(/[a-z]/i)) {
-            style += "font-style: italic;";
-        }
-
-        state.formatedPassword += `<span style="${style}">${letter}</span>`;
-    });
-}
+levels[35] = [text, hhmm, moonToHex, youtube, sum25, atom, fill, format];
 
 const state = init();
 
@@ -218,8 +176,8 @@ function update() {
         Number(x.innerText.replace(/\n(.|\n)*/g, "").replace(/\D+/g, ""))
     );
 
-    state.password = "";
     state.level = level;
+    state.password = "";
     delete state.formatedPassword;
     const handlers = levels[min(level, levels.length - 1)].flat(Infinity);
 
@@ -277,7 +235,18 @@ function wordle() {
     state.password += state.wordle ?? "[solving wordle...]";
 }
 function moon() {
-    const moonPhases = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"];
+    const moonPhases = [
+        "🌘",
+        "🌑",
+        "🌒",
+        "🌓",
+        "🌔",
+        "🌕",
+        "🌖",
+        "🌗",
+        "🌘",
+        "🌑",
+    ];
     const synodicMonth = 29.53058867;
     const knownNewMoon = new Date(Date.UTC(2000, 0, 6, 18, 14));
     const now = new Date();
@@ -303,7 +272,9 @@ function moon() {
     } else {
         phaseIndex = 0; // New Moon 🌑
     }
-    state.password += moonPhases[phaseIndex];
+    //state.password += moonPhases[phaseIndex];
+    // FIXME Workaround for for edge cases
+    state.password += moonPhases.slice(phaseIndex - 2, phaseIndex).join("");
 }
 function country() {
     if (!state.country && !state.fetshingCountry) {
@@ -332,7 +303,7 @@ function chess() {
     }
     state.password += "" + (state.chess ?? "[playing chess ...]");
 }
-function chemicalTo200() {
+function atom() {
     let a =
         "#:H:He:Li:Be:B:C:N:O:F:Ne:Na:Mg:Al:Si:P:S:Cl:Ar:K:Ca:Sc:Ti:V:Cr:Mn:Fe:Co:Ni:Cu:Zn:Ga:Ge:As:Se:Br:Kr:Rb:Sr:Y:Zr:Nb:Mo:Tc:Ru:Rh:Pd:Ag:Cd:In:Sn:Sb:Te:I:Xe:Cs:Ba:La:Ce:Pr:Nd:Pm:Sm:Eu:Gd:Tb:Dy:Ho:Er:Tm:Yb:Lu:Hf:Ta:W:Re:Os:Ir:Pt:Au:Hg:Tl:Pb:Bi:Po:At:Rn:Fr:Ra:Ac:Th:Pa:U:Np:Pu:Am:Cm:Bk:Cf:Es:Fm:Md:No:Lr:Rf:Db:Sg:Bh:Hs:Mt:Ds:Rg:Cn:Nh:Fl:Mc:Lv:Ts:Og".split(
             ":"
@@ -358,12 +329,7 @@ function chemicalTo200() {
     }
     state.password += "" + add;
 }
-function vowels() {
-    state.formatedPassword = state.password.replace(
-        /[aeiouy]/gi,
-        (x) => `<b>${x}</b>`
-    );
-}
+
 function youtube() {
     let m = document.body.innerText.match(/(\d+)\s*minute(\s*(\d+)\s*second)/);
     let [_, min, __, sec] = m.map(Number);
@@ -409,6 +375,47 @@ function hexColor() {
             .map((x) => x.toString(16).padStart(2, 0))
             .join("");
     state.password += `${rgb}`;
+}
+
+function fill() {
+    const l = 101 - [...state.password].length + 12;
+    state.password +=
+        "!#$%&'()*+,-./:;=?@[]^_`{|}~!#$%&'()*+,-./:;=?@[]^_`{|}~".substr(0, l);
+}
+function format() {
+    state.formatedPassword = "";
+    let letters = [...state.password];
+    let sizes = [0, 1, 4, 9, 12, 16, 25, 28, 32, 36, 42, 49, 64, 81];
+    let letterindex = {};
+    let len = letters.length;
+    letters.forEach((letter, index) => {
+        let style = "";
+        if (letter.match(/[aeiouy]/i)) {
+            style += "font-weight: bold;";
+        } else if (state.level >= 30 && letter.match(/[0-9]/)) {
+            style += `font-size: ${Number(letter) ** 2}px;`;
+        }
+        if (state.level >= 28 && letter.match(/[XVI]/i)) {
+            style += "font-family: Times New Roman;";
+        } else if (state.level >= 27 && letter.match(/[a-zA-Z]/)) {
+            style += "font-family: Wingdings;";
+        }
+        if (state.level >= 31 && !letter.match(/[0-9]/)) {
+            let x = letter.toLowerCase();
+            if (letterindex[x]) {
+                letterindex[x]++;
+            } else {
+                letterindex[x] = 5;
+            }
+            style += `font-size: ${sizes[letterindex[x]]}px;`;
+        }
+
+        if (state.level >= 26 && letter.match(/[a-z]/i)) {
+            style += "font-style: italic;";
+        }
+
+        state.formatedPassword += `<span style="${style}">${letter}</span>`;
+    });
 }
 // helpers
 
