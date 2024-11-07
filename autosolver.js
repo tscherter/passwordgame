@@ -3,7 +3,7 @@
 // current time might be an issue conflicting with rule 5
 
 const { max, min } = Math;
-const delay = 1000;
+const delay = 100;
 const levels = [];
 
 levels[0] = ["hi"];
