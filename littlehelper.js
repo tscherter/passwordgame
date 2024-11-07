@@ -3,7 +3,7 @@
 // current time might be an issue conflicting with rule 5
 
 const { max, min } = Math;
-const delay = 1000;
+const delay = 200;
 const levels = [];
 
 levels[0] = ["hi"];
@@ -132,11 +132,6 @@ function init() {
     button.onclick = shuffle;
     hole.appendChild(button);
 
-    button = document.createElement("button");
-    button.innerHTML = "captcha refresh";
-    button.onclick = () => {
-        document.querySelector(".captcha-refresh").click();
-    };
     document.querySelector(".password-label").appendChild(button);
     hole.appendChild(button);
 
@@ -196,7 +191,8 @@ function update() {
             state.password += handler(state.password);
         }
     }
-    let formatedPassword = format(state.password);
+    let formatedPassword = state.password;
+    if (level >= 19) formatedPassword = format(state.password);
     if (
         state.target.innerText != state.password ||
         formatedPassword != state.lastPassword
@@ -225,11 +221,15 @@ function sum25(password) {
     );
 }
 function captcha() {
-    return document
-        .querySelector(".captcha-img")
-        ?.src.split("/")
-        .at(-1)
-        .split(".")[0];
+    // document.querySelector(".captcha-refresh")
+    const captchaElement = document.querySelector(".captcha-img");
+    const src = captchaElement.src; // https://neal.fun/password-game/captchas/mm3nn.png
+    const match = src.match(/([a-z0-9]{5})\.png/)[1];
+    if (match.match(/[0-9]/)) {
+        document.querySelector(".captcha-refresh").click();
+        state.update();
+    }
+    return match;
 }
 function wordle() {
     const date = getCurrentDate();
@@ -283,9 +283,9 @@ function moon() {
     } else {
         phaseIndex = 0; // New Moon 🌑
     }
-    // return moonPhases[phaseIndex];
-    // FIXME Workaround for for edge cases
-    return moonPhases.slice(phaseIndex - 2, phaseIndex).join("");
+    return moonPhases[phaseIndex];
+    // Workaround for for edge cases
+    // return moonPhases.slice(phaseIndex - 2, phaseIndex).join("");
 }
 function country() {
     if (!state.country && !state.fetshingCountry) {
@@ -390,11 +390,12 @@ function hexColor() {
 }
 
 function fill(password) {
-    const l = 101 - [...password].length + 14;
-    return "!#$%&'()*+,-./:;=?@[]^_`{|}~!#$%&'()*+,-./:;=?@[]^_`{|}~".substr(
-        0,
-        l
-    );
+    const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
+    const charCount = Array.from(segmenter.segment(password)).length;
+    const hexagrams =
+        "䷀䷁䷂䷃䷄䷅䷆䷇䷈䷉䷊䷋䷌䷍䷎䷏䷐䷑䷒䷓䷔䷕䷖䷗䷘䷙䷚䷛䷜䷝䷞䷟䷠䷡䷢䷣䷤䷥䷦䷧䷨䷩䷪䷫䷬䷭䷮䷯䷰䷱䷲䷳䷴䷵䷶䷷䷸䷹䷺䷻䷼䷽䷾䷿";
+    console.log({ charCount });
+    return hexagrams.slice(0, 101 - charCount);
 }
 function format(password) {
     const letters = Array.from(password);
@@ -418,7 +419,7 @@ function format(password) {
             if (letterindex[x]) {
                 letterindex[x]++;
             } else {
-                letterindex[x] = 5;
+                letterindex[x] = 1;
             }
             style += `font-size: ${sizes[letterindex[x]]}px;`;
         }
@@ -484,11 +485,14 @@ function getCurrentDate() {
 }
 
 function hhmm() {
-    const now = new Date();
-    now.setMinutes(now.getMinutes());
+    // original code from neal.fun
+    const time = new Date()
+        .toLocaleString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: !0,
+        })
+        .split(" ")[0];
 
-    const hours = String(now.getHours()).padStart(2, "0");
-    const minutes = String(now.getMinutes()).padStart(2, "0");
-
-    state.password += `${hours}:${minutes}`;
+    return time;
 }
