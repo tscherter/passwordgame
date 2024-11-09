@@ -3,7 +3,7 @@
 // current time might be an issue conflicting with rule 5
 
 const { max, min } = Math;
-const delay = 10;
+const delay = 500;
 const levels = [];
 
 levels[0] = ["hi"];
@@ -249,6 +249,13 @@ function moon() {
         "🌘",
         "🌑",
     ];
+    if (state.level === 13) {
+        state.moonIndex ??= -1;
+        state.moonIndex++;
+        state.moon = moonPhases[state.moonIndex];
+    }
+    return state.moon;
+    /*
     const synodicMonth = 29.53058867;
     const knownNewMoon = new Date(Date.UTC(2000, 0, 6, 18, 14));
     const now = new Date();
@@ -274,8 +281,7 @@ function moon() {
     } else {
         phaseIndex = 0; // New Moon 🌑
     }
-    return moonPhases[phaseIndex];
-    
+    return moonPhases[phaseIndex];*/
 }
 function country() {
     if (!state.country && !state.fetshingCountry) {
@@ -376,19 +382,18 @@ function hexColor() {
             .map(Number)
             .map((x) => x.toString(16).padStart(2, 0))
             .join("");
-    if (rgb.match(/[0-9]/)) {
+    let sum = [...rgb]
+        .filter((x) => /[1-9]/.test(x))
+        .map(Number)
+        .reduce((sum, x) => sum, 0);
+    if (sum > 5) {
         document.querySelector(".refresh").click();
         state.update();
     }
 
     return rgb;
 }
-
 function fill(password) {
-
-    text.length
-    [...text]
-
     const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
     const charCount = Array.from(segmenter.segment(password)).length;
     const hexagrams =
@@ -481,7 +486,6 @@ function getCurrentDate() {
     const day = String(today.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
 }
-
 function hhmm() {
     // original code from neal.fun
     const time = new Date()
