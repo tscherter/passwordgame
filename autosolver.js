@@ -2,10 +2,9 @@
 // copy the code into your browsers console
 // current time might be an issue conflicting with rule 5
 const { max, min } = Math;
-const delay = 5;
+const delay = 100;
 const levels = [];
 levels[0] = ["hi"];
-levels[0] = ["0ImayXXXVshellBe€997"];
 // Your password must be at least 5 characters.
 levels[1] = ["hello"];
 // … include a number.
