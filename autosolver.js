@@ -17,42 +17,44 @@ levels[4] = ["H€ll0"];
 levels[5] = ["H€ll", sum25];
 // Your password must include a month of the year.
 levels[6] = ["H€may", sum25];
-// … include a roman numeral.
+// … include a roman numeral.   /M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})/g,
 levels[7] = ["I€may", sum25];
 // … include one of our sponsors: …
 levels[8] = ["I€mayshell", sum25];
 // The roman numerals in your password should multiply to 35.
-levels[9] = ["I€XXXVmayshell", sum25];
+// 1x35 but actually the 1 is not needed
+levels[9] = ["XXXV€mayshell", sum25];
 // Your password must include this CAPTCHA...
-levels[10] = ["I€XXXVmayshell", captcha, sum25];
+levels[10] = ["€XXXVmayshell", captcha, sum25];
 // … include today's Wordle answer.
-levels[11] = ["I€XXXVmayshell", captcha, wordle, sum25];
+levels[11] = ["€XXXVmayshell", captcha, wordle, sum25];
 // … include a two letter symbol from the periodic table.
-levels[12] = ["ImayXXXVshellBe€", captcha, wordle, sum25];
+levels[12] = ["mayXXXVsHell€", captcha, wordle, sum25];
 // … include the current phase of the moon as an emoji.
-levels[13] = ["ImayXXXVshellBe€", moon, captcha, wordle, sum25];
+levels[13] = ["mayXXXVsHelle€", moon, captcha, wordle, sum25];
 // … include the name of this country.
-levels[14] = ["ImayXXXVshellBe€", moon, captcha, wordle, country, sum25];
+levels[14] = ["mayXXXVsHell€", moon, captcha, wordle, country, sum25];
 // …  include a leap year.
-levels[15] = ["0ImayXXXVshellBe€", moon, captcha, wordle, country, sum25];
+levels[15] = ["0mayXXXVsHell€", moon, captcha, wordle, country, sum25];
 // …  include the best move in algebraic chess notation.
-let moonToChess = [moon, captcha, wordle, country, chess];
-levels[16] = ["0ImayXXXVshellBe€", moonToChess, sum25];
+let moonToChess = [captcha, moon, wordle, country, chess];
+levels[16] = ["0mayXXXVsHell€", moonToChess, sum25];
 // 🥚 ← This is my chicken Paul. He hasn't hatched yet, please put him in your password and keep him safe.
-levels[17] = ["🥚0ImayXXXVshellBe€", moonToChess, sum25];
+levels[17] = ["🥚0mayXXXVsHell€", moonToChess, sum25];
 // The elements in your password must have atomic numbers that add up to 200.
-levels[18] = ["🥚0ImayXXXVshellBe€", moon, moonToChess, sum25, atom];
+levels[18] = ["🥚0mayXXXVsHell€", moon, moonToChess, sum25, atom];
 // All the vowels in your password must be bolded.
-levels[19] = ["🥚0ImayXXXVshellBe€", moonToChess, sum25, atom];
+levels[19] = ["🥚0mayXXXVsHell€", moonToChess, sum25, atom];
 // Oh no! Your password is on fire. Quick, put it out!
 levels[20] = levels[19];
 // Your password is not strong enough 🏋️‍♂️
-levels[21] = ["🥚🏋️‍♂️🏋️‍♂️🏋️‍♂️0ImayXXXVshellBe", moonToChess, sum25, atom];
+levels[21] = ["🥚🏋️‍♂️🏋️‍♂️🏋️‍♂️0mayXXXVsHell", moonToChess, sum25, atom];
 // … must contain one of the following affirmations: ...
-let text = "🥚🏋️‍♂️🏋️‍♂️🏋️‍♂️0IamlovedmayXXXVshellBe";
+// d is provided from the captcha
+let text = "🥚🏋️‍♂️🏋️‍♂️🏋️‍♂️0mayXXXVsHelliamlove";
 levels[22] = [text, moonToChess, sum25, atom];
 // Paul has hatched … 🐛🐛🐛🐛
-text = "🐛🐔0🏋️‍♂️🏋️‍♂️🏋️‍♂️101IamlovedmayXXXVshellBe";
+text = "🐛🐔0🏋️‍♂️🏋️‍♂️🏋️‍♂️101mayXXXVsHelliamlove";
 levels[23] = [text, moonToChess, sum25, atom];
 // Your password must include the URL of a X minute Y second long YouTube video.
 levels[24] = [text, moonToChess, youtube, sum25, atom];
@@ -63,9 +65,9 @@ levels[26] = [text, moonToChess, youtube, sum25, atom];
 // At least 30% of your password must be in the Wingdings font.
 levels[27] = levels[26];
 // Your password must include this color in hex.
-text = "🐛🐔🏋️‍♂️🏋️‍♂️🏋️‍♂️101IamlovedmayXXXVshellBe"; // hex color must have /[a-f]0[a-f]/
+text = "🐛🐔🏋️‍♂️🏋️‍♂️🏋️‍♂️101mayXXXVsHelliamlove"; // hex color must have /[a-f]0[a-f]/
 let moonToHex = [moonToChess, youtube, hexColor];
-levels[28] = [text, moonToHex, youtube, sum25, atom];
+levels[28] = [text, moonToHex, sum25, atom];
 // All roman numerals must be in Times New Roman.
 // The font size of every digit must be equal to its square.
 // Every instance of the same letter must have a different font size.
@@ -78,9 +80,9 @@ levels[32] = [text, moonToHex, sum25, atom, fill];
 levels[34] = levels[33] = levels[32];
 
 // Rule 35 Your password must include the current time.
-text = "🐔🏋️‍♂️🏋️‍♂️🏋️‍♂️101IamlovedmayXXXVshellBe";
+text = "🐔🏋️‍♂️🏋️‍♂️🏋️‍♂️101mayXXXVsHelliamlove";
 
-levels[35] = [text, hhmm, moonToHex, sum25, atom, fill, final];
+levels[35] = [text, moonToHex, hhmm, sum25, atom, fill, final];
 
 const state = window._state ?? {};
 window._state = state;
@@ -127,7 +129,6 @@ function init() {
     return state;
 }
 function update() {
-    console.log(state.stop);
     if (state.stop) return;
     const ruleElements = [...document.querySelectorAll(".rule-top")];
     const rules = ruleElements.map((x) =>
@@ -156,7 +157,6 @@ function update() {
     ) {
         state.target.innerHTML = state.lastPassword = formatedPassword;
         state.plain.innerText = state.password;
-        console.log(state.level);
     }
 }
 function shuffle() {
@@ -180,7 +180,7 @@ function captcha() {
     const captchaElement = document.querySelector(".captcha-img");
     const src = captchaElement.src; // https://neal.fun/password-game/captchas/mm3nn.png
     const match = src.match(/([a-z0-9]{5})\.png/)[1];
-    if (match.match(/[0-9]/)) {
+    if (match.match(/^[^d]|[0-9]/)) {
         document.querySelector(".captcha-refresh").click();
         state.update();
     }
