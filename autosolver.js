@@ -98,17 +98,11 @@ function init() {
     state.update = debounce(update, delay);
     const hole = document.querySelector(".password-label");
     let msg = document.createElement("div");
-    msg.innerHTML = `<details id='help'>
-    <summary>❓</summary><ul>
-    <li>
-  🧪 The autosolver is experimental, just restart if it breaks.</li><li>
-⚠️ It uses online resources that may take some time or fail,
-    e.g. while solving the chess problem, geo guessing.</li><li>
-⚠️ YouTube IDs can conflict with the atoms summing to 200 (rule 18).</li><li>
-⚠️ Current time o. captcha might be an issue conflicting with rule 5.</li><li>
-💡 Sometimes deleting a part of the password may help.</li><li>
-💡 Copy the password before proceeding with final step.</li></ol>
-</details>`;
+    msg.innerHTML = `<details id='help'><summary>❓</summary><ul>
+    <li>🧪 The autosolver is experimental, just restart if it breaks.</li>
+    <li>⚠️ It uses online resources that may take some time or fail, e.g. while solving the chess problem, geo guessing.</li>
+    <li>⚠️ YouTube IDs can conflict with the atoms summing to 200 (rule 18).</li>
+    <li>⚠️ Current time o. captcha might be an issue conflicting with rule 5.</li></ul></details>`;
     hole.appendChild(msg);
     state.plain = document.createElement("pre");
     state.plain.style.backgroundColor = "#ddffdd";
