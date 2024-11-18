@@ -51,10 +51,10 @@ levels[20] = levels[19];
 levels[21] = ["🥚🏋️‍♂️🏋️‍♂️🏋️‍♂️0mayXXXVsHell", moonToChess, sum25, atom];
 // … must contain one of the following affirmations: ...
 // d is provided from the captcha
-let text = "🥚🏋️‍♂️🏋️‍♂️🏋️‍♂️0mayXXXVsHelliamlove";
+let text = "🥚🏋️‍♂️🏋️‍♂️🏋️‍♂️0mayXXXVsHelliamloved";
 levels[22] = [text, moonToChess, sum25, atom];
 // Paul has hatched … 🐛🐛🐛🐛
-text = "🐛🐔0🏋️‍♂️🏋️‍♂️🏋️‍♂️101mayXXXVsHelliamlove";
+text = "🐛🐔0🏋️‍♂️🏋️‍♂️🏋️‍♂️101mayXXXVsHelliamloved";
 levels[23] = [text, moonToChess, sum25, atom];
 // Your password must include the URL of a X minute Y second long YouTube video.
 levels[24] = [text, moonToChess, youtube, sum25, atom];
@@ -65,7 +65,7 @@ levels[26] = [text, moonToChess, youtube, sum25, atom];
 // At least 30% of your password must be in the Wingdings font.
 levels[27] = levels[26];
 // Your password must include this color in hex.
-text = "🐛🐔🏋️‍♂️🏋️‍♂️🏋️‍♂️101mayXXXVsHelliamlove"; // hex color must have /[a-f]0[a-f]/
+text = "🐛🐔🏋️‍♂️🏋️‍♂️🏋️‍♂️101mayXXXVsHelliamloved"; // hex color must have /[a-f]0[a-f]/
 let moonToHex = [moonToChess, youtube, hexColor];
 levels[28] = [text, moonToHex, sum25, atom];
 // All roman numerals must be in Times New Roman.
@@ -80,7 +80,7 @@ levels[32] = [text, moonToHex, sum25, atom, fill];
 levels[34] = levels[33] = levels[32];
 
 // Rule 35 Your password must include the current time.
-text = "🐔🏋️‍♂️🏋️‍♂️🏋️‍♂️101mayXXXVsHelliamlove";
+text = "🐛🐔🏋️‍♂️🏋️‍♂️🏋️‍♂️101mayXXXVsHelliamloved";
 
 levels[35] = [text, moonToHex, hhmm, sum25, atom, fill, final];
 
@@ -174,7 +174,7 @@ function captcha() {
     const captchaElement = document.querySelector(".captcha-img");
     const src = captchaElement.src; // https://neal.fun/password-game/captchas/mm3nn.png
     const match = src.match(/([a-z0-9]{5})\.png/)[1];
-    if (match.match(/^[^d]|[0-9]/)) {
+    if (match.match(/[0-9]/)) {
         document.querySelector(".captcha-refresh").click();
         state.update();
     }
